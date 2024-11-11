@@ -1,0 +1,65 @@
+{
+    "name": "fansipan/request-matcher",
+    "description": "PSR Request matcher",
+    "keywords": [
+        "fansipan",
+        "psr",
+        "request-matcher"
+    ],
+    "homepage": "https://github.com/phanxipang/request-matcher",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lynh",
+            "email": "contact@lynh.me",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2.5|^8.0",
+        "psr/http-message": "^1.0|^2.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.4",
+        "nyholm/psr7": "^1.8",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^8.0|^9.0",
+        "webmozart/glob": "^4.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fansipan\\RequestMatcher\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fansipan\\RequestMatcher\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "analyse": [
+            "vendor/bin/phpstan analyse"
+        ],
+        "cs": [
+            "vendor/bin/php-cs-fixer fix"
+        ],
+        "test": [
+            "vendor/bin/phpunit"
+        ],
+        "check": [
+            "@cs --dry-run",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
