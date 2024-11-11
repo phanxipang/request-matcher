@@ -1,5 +1,4 @@
-
-# Fansipan Request Matcher
+# Fansipan PSR-7 Request Matcher
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Github Actions][ico-gh-actions]][link-gh-actions]
@@ -19,7 +18,46 @@ composer require fansipan/request-matcher
 
 ## Usage
 
+To create a matcher instance with your assertions, you can use the following example to match the request host:
 
+```php
+use Fansipan\RequestMatcher\HostRequestMatcher;
+use Psr\Http\Message\RequestInterface;
+
+$matcher = new HostRequestMatcher('localhost');
+
+// Matches http://localhost
+
+/** @var RequestInterface $request */
+$matcher->matches($request);
+```
+
+### Customer Request Matcher
+
+You can also create a matcher using a callback. For instance:
+
+```php
+use Fansipan\RequestMatcher\CallbackRequestMatcher;
+use Psr\Http\Message\RequestInterface;
+
+$matcher = new CallbackRequestMatcher(static fn (RequestInterface $request) => $request->getUri()->getScheme() == 'https' && $request->getUri()->getHost() === 'my.app');
+```
+
+### Chain Request Matcher
+
+The example above can be grouped by using `ChainRequestMatcher`
+
+```php
+use Fansipan\RequestMatcher\CallbackRequestMatcher;
+use Fansipan\RequestMatcher\HostRequestMatcher;
+use Fansipan\RequestMatcher\SchemeRequestMatcher;
+use Psr\Http\Message\RequestInterface;
+
+$matcher = new ChainRequestMatcher([
+    new SchemeRequestMatcher('https'),
+    new HostRequestMatcher('my.app'),
+]);
+```
 
 ## Testing
 
