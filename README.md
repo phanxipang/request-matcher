@@ -40,7 +40,7 @@ You can also create a matcher using a callback. For instance:
 use Fansipan\RequestMatcher\CallbackRequestMatcher;
 use Psr\Http\Message\RequestInterface;
 
-$matcher = new CallbackRequestMatcher(static fn (RequestInterface $request) => $request->getUri()->getScheme() == 'https' && $request->getUri()->getHost() === 'my.app');
+$matcher = new CallbackRequestMatcher(static fn (RequestInterface $request) => $request->getUri()->getScheme() === 'https' && $request->getUri()->getHost() === 'my.app');
 ```
 
 ### Chain Request Matcher
